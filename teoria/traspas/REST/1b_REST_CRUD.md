@@ -52,23 +52,26 @@ Sean por las razones que sean, en la actualidad **la inmensa mayoría de los API
 
 Típicamente, las colecciones se ponen en plural, y un recurso concreto dentro de una colección se representa concatenando un identificador a la colección
 
-Ejemplo de un supuesto campus virtual de la UA
+Ejemplo: un supuesto API de la UA (NO es un sitio web, sino un API)
 
 ```HTTP
 /* todas las carreras */
-http://api.cv.ua.es/carreras
+http://api.ua.es/carreras
 /* Grado en Ingeniería Informática */
-http://api.cv.ua.es/carreras/GII/
+http://api.ua.es/carreras/GII/
 /* todos los alumnos de la UA */
-http://api.cv.ua.es/alumnos
+http://api.ua.es/alumnos
 /* Un alumno concreto */
-http://api.cv.ua.es/alumnos/11222333N
+http://api.ua.es/alumnos/11222333N
 ```
 
 ---
 
 
-IMPORTANTE: una URL de un recurso no es nada más que un "puntero" al recurso. Para hacer algo útil en el API habrá que lanzar una petición HTTP sobre esta URL
+IMPORTANTE:
+
+- Una URL de un recurso no es nada más que un "puntero" al recurso. Para hacer algo útil en el API habrá que lanzar una petición HTTP (GET/POST/PUT/DELETE) sobre esta URL
+- Abrir esta URL en el navegador (que sería hacer una petición GET) no nos va a mostrar una página web con los datos. Es un API, no una web.
 
 ---
 
@@ -87,15 +90,36 @@ NOTA: el login/logout se tratan de una forma especial, como ya veremos
 
 * **Obtener** el listado de *todos* los alumnos: petición HTTP
    - de tipo GET
-   - a la URL `http://miaplicacion.com/alumnos`
+   - a la URL `http://api.ua.es/alumnos`
 * **Obtener** los datos del alumno con DNI `11222333N`: petición HTTP
    - de tipo GET
-   - a la URL `http://miaplicacion.com/alumnos/11222333N`
+   - a la URL `http://api.ua.es/alumnos/11222333N`
 * Dar de **alta** un alumno: petición HTTP
    - de tipo POST
    - adjuntando los datos del nuevo alumno
-   - a la URL `http://miaplicacion.com/alumnos`
+   - a la URL `http://api.ua.es/alumnos`
 
+---
+
+## ¿Cómo se hacen "físicamente" las peticiones?
+
+- En general **por código**, en el lenguaje en que estemos programando la aplicación que hace uso del API
+
+```javascript
+fetch('http://reqres.in/api/users', {
+  method: 'POST',
+  //decimos que estamos enviando JSON
+  headers: {
+   'Content-type':'application/json'
+  },
+  //El JSON se debe enviar en forma de cadena
+  //Para convertir un objeto a cadena JSON: JSON.stringify(objeto)
+  body: JSON.stringify(usuario)
+}
+```
+
+- En plan **"prueba rápida"** se pueden hacer peticiones GET simplemente con el navegador
+- Hay **herramientas** para probar peticiones (p. ej. [Postman](https://www.getpostman.com/))
 
 ---
 
@@ -139,7 +163,8 @@ En realidad REST no es más que **un conjunto de convenciones arbitrarias**, que
 > Para diseñar un buen API para los servicios necesitamos usar algo que la gente conozca. Así que, **aunque no hay nada superior desde el punto de vista técnico en REST** y JSON con respecto a usar RPC con un protocolo de más bajo nivel, **usar algo que la gente comprenda bien [...] ayuda mucho en el diseño del API**
 
 
-<div class="caption">Jay Krebs, [Lessons from Building and Scaling LinkedIn](http://www.infoq.com/presentations/linkedin-architecture-stack) (QCon, NY 2013)</div>
+Jay Krebs, [Lessons from Building and Scaling LinkedIn](http://www.infoq.com/presentations/linkedin-architecture-stack) (QCon, NY 2013)
+<!-- .element: class="caption" -->
 
 ---
 

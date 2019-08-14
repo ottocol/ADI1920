@@ -100,7 +100,7 @@ https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
 
 ---
 
-RPC no es implícitamente inferior (ni superior) a REST
+**RPC no es implícitamente inferior (ni superior) a REST**
 
 - RPC puede resultar más intuitivo cuando un API se exprese mejor como un conjunto de operaciones/procesos más que de recursos
 - REST es el más popular (actualmente) en APIs públicos
@@ -169,7 +169,7 @@ http://<your-ip>:<your-port>/jsonrpc
 
 ## Otro ejemplo: el API Web de Slack
 
-No sigue ningún estándar RPC, como [se dice en la documentación](https://api.slack.com/web#basics) simplemente es ***"una colección de métodos HTTP al estilo RPC"***
+No sigue ningún estándar RPC, como [se dice en la documentación](https://api.slack.com/web#basics) simplemente es **"una colección de métodos HTTP al estilo RPC"**
 
 - La URL siempre es de la forma `https://slack.com/api/METHOD_FAMILY.method`. Por ejemplo
   + `https://slack.com/api/channels.create`
@@ -231,7 +231,7 @@ Además del lenguaje de consulta hay una sintaxis para definir el **esquema** de
 
 ![](img_1d/schema.png)
 
-<!-- .element class="caption" -->Esta sintaxis es "abstracta". La sintaxis real dependerá del lenguaje que estemos usando para implementar el servidor GraphQL
+Esta sintaxis es "abstracta". La sintaxis real dependerá del lenguaje que estemos usando para implementar el servidor GraphQL
 
 
 ---
@@ -248,7 +248,6 @@ Además del lenguaje de consulta hay una sintaxis para definir el **esquema** de
 ## Ejemplo sencillo
 
 - Tomado de [https://github.com/kadirahq/graphql-blog-schema](https://github.com/kadirahq/graphql-blog-schema). Un API para gestionar un blog, sin BD, con datos en memoria para simplificar.
-
 - [Esquema](https://github.com/kadirahq/graphql-blog-schema/blob/master/src/schema.js)
   * Recursos: `Post`, `Category`, `Author`, `Comment` 
   * Relaciones:  `Post->Category(1:1)`, `Post->Comment(1:N)`, `Post->Author(N:1)`, `Comment->Author(N:1)`
@@ -332,7 +331,8 @@ const Query = new GraphQLObjectType({
   ...
 })
 ```
-<!-- .element class="caption" -->[Código completo](https://github.com/kadirahq/graphql-blog-schema/blob/master/src/schema.js)
+[Código completo](https://github.com/kadirahq/graphql-blog-schema/blob/master/src/schema.js)
+<!-- .element class="caption" -->
 
 ---
 
@@ -423,7 +423,8 @@ GraphQL es una tecnología prometedora, pero como todas las nuevas tecnologías 
 
 <iframe width="640" height="360" data-src="https://www.youtube.com/embed/cUIhcgtMvGc" frameborder="0" allowfullscreen></iframe>"</iframe>
 
-<!-- .element: class="caption" --> [Por qué API REST está muerto y debemos usar APIs GraphQL - José María Rodríguez](https://youtu.be/cUIhcgtMvGc) (Independientemente de lo tremendista del título, una charla interesante para ilustrar cómo funciona GraphQL y diferencias con REST)
+[Por qué API REST está muerto y debemos usar APIs GraphQL - José María Rodríguez](https://youtu.be/cUIhcgtMvGc) (Independientemente del *clickbait* del título, una charla interesante para ilustrar cómo funciona GraphQL y diferencias con REST)
+<!-- .element: class="caption" --> 
 
 ---
 
@@ -443,21 +444,22 @@ GraphQL es una tecnología prometedora, pero como todas las nuevas tecnologías 
 ## Petición/respuesta vs. eventos
 
 
-<!-- .element class="caption" -->De [https://realtimeapi.io/hub/event-driven-apis/](https://realtimeapi.io/hub/event-driven-apis/)
-![ddd](https://dzone.com/storage/temp/6520586-pushpin.jpg)
+De [https://realtimeapi.io/hub/event-driven-apis/](https://realtimeapi.io/hub/event-driven-apis/)
+<!-- .element class="caption" -->
 
+![ddd](https://dzone.com/storage/temp/6520586-pushpin.jpg)
 
 ---
 
 ## Algunas tecnologías web para tiempo real/eventos
 
-**Servidor-Cliente(Navegador)**
+**de Servidor a Cliente(Navegador)**
 
 - **Long polling**: el cliente hace *polling* pero la conexión se mantiene abierta hasta que el servidor envía datos. Entonces hay que hacer *polling* de nuevo
 - **Server Sent Events**: el cliente recibe de forma asíncrona mensajes y eventos del servidor
 - **Websockets**: comunicación bidireccional asíncrona basada en eventos
 
-**Servidor-Servidor**
+**de Servidor a Servidor**
 
 - **Webhooks**: se avisa con una petición HTTP cuando hay nuevos datos (no sigue exactamente el esquema de la transparencia anterior)
 
@@ -467,7 +469,9 @@ GraphQL es una tecnología prometedora, pero como todas las nuevas tecnologías 
 
 ## Polling vs Long polling vs. SSE
 
-<!-- .element class="caption" --> De [Polling vs SSE vs WebSocket— How to choose the right one](https://codeburst.io/polling-vs-sse-vs-websocket-how-to-choose-the-right-one-1859e4e13bd9)
+De [Polling vs SSE vs WebSocket— How to choose the right one](https://codeburst.io/polling-vs-sse-vs-websocket-how-to-choose-the-right-one-1859e4e13bd9)
+<!-- .element class="caption" --> 
+
 ![](https://cdn-images-1.medium.com/max/800/1*zG7Jyeq02JRAN6Wz6gs15g.png)
 
 ---
@@ -478,13 +482,14 @@ GraphQL es una tecnología prometedora, pero como todas las nuevas tecnologías 
  + **Unidireccionales**, siempre desde el servidor al cliente
  + Mensajes de **texto**
  + Funciona sobre **HTTP**
- + El API [no está soportado](https://caniuse.com/#feat=eventsource) en **Explorer/Edge**, Opera
+ + El API solo está soportado en Edge [desde versiones recientes](https://caniuse.com/#feat=eventsource) 
 
 ---
 
 ## Ejemplo de SSE
 
-<!-- .element  class="caption"--> Ejemplo completo en [https://glitch.com/edit/#!/peridot-coin](https://glitch.com/edit/#!/peridot-coin)
+Ejemplo completo en [https://glitch.com/edit/#!/peridot-coin](https://glitch.com/edit/#!/peridot-coin)
+<!-- .element  class="caption"--> 
 
 ```javascript
 //Servidor
@@ -535,7 +540,8 @@ Facebook ofrece algunos *endpoints* SSE en su "graph API"
 
 ## Ejemplo de websockets
 
-<!-- .element  class="caption"--> Ejemplo completo en [https://glitch.com/edit/#!/sugar-property](https://glitch.com/edit/#!/sugar-property)
+Ejemplo completo en [https://glitch.com/edit/#!/sugar-property](https://glitch.com/edit/#!/sugar-property)
+<!-- .element  class="caption"--> 
 
 ```javascript
 //SERVIDOR
@@ -574,7 +580,7 @@ document.getElementById('botonMensaje').addEventListener('click', function() {
 ## Webhooks
 
 - Cuando nuestro servidor accede a un servicio de un tercero y queremos que ese tercero nos avise de actualizaciones
-- Unir/modificar ideas que ya conocéis de otras asignaturas
+- Unir/modificar ideas que ya conocéis de otros contextos
    - "Patrón de diseño" **publicar/suscribir** 
    - ***Callbacks***
 - Cuando hay algún evento importante, el servidor del Webhook lanza una petición POST a una URL de nuestro servidor (*callback*)

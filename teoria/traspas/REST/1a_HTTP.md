@@ -178,9 +178,8 @@ En la actualidad la mayoría son ignorados por el navegador, que se limita a mos
 
 No se guardan datos permanentes entre una petición/respuesta y la siguiente
 
-[http://xkcd.com/869/](http://xkcd.com/869/) <!-- .element: class="caption" -->
-
-![](img_1a/xkcd.png)
+![](img_1a/xkcd.png) <!-- .element: class="stretch" -->
+[http://xkcd.com/869](http://xkcd.com/869/) <!-- .element: class="caption" -->
 
 
 ---
@@ -196,7 +195,7 @@ No se guardan datos permanentes entre una petición/respuesta y la siguiente
 
 ## Javascript
 
-<div class="stretch">![](img_1a/js.png)</div>
+![](img_1a/js.png)
 *   El código se descarga junto con el HTML y se interpreta en el navegador **después de** la petición/respuesta HTTP
    -  Recordemos que el código en el servidor se ejecuta **antes de** enviar la respuesta  
 *   Inicialmente se usaba para pequeños cálculos, validación de formularios, [efectos tontos](http://www.javascript-fx.com/mouse_trail/pinwheel/demo.html)
@@ -205,9 +204,11 @@ No se guardan datos permanentes entre una petición/respuesta y la siguiente
 
 ## Frontend vs. Backend
 
-Con Javascript aparece el mundo del _desarrollo frontend_
+Con Javascript aparece el mundo del **desarrollo frontend**
 
-<!-- .element: class="caption" --> ["Picking a Technology Stack"](https://docs.google.com/presentation/d/1pA6reUNKqkfupSogZB4Q42Tk98VAq_loqkIDE-HSxAE/present#slide=id.p), Pamela Fox
+["Picking a Technology Stack"](https://docs.google.com/presentation/d/1pA6reUNKqkfupSogZB4Q42Tk98VAq_loqkIDE-HSxAE/present#slide=id.p), Pamela Fox
+<!-- .element: class="caption" --> 
+
 ![](img_1a/front_vs_back.png)
 
 
@@ -215,7 +216,9 @@ Con Javascript aparece el mundo del _desarrollo frontend_
 
 ## Arquitectura "clásica" para apps web
 
-<!-- .element: class="caption" --> Charla: [The New Application Architectures](http://www.infoq.com/presentations/SpringOne-2GX-2012-Keynote-2), Adrian Colyer
+Charla: [The New Application Architectures](http://www.infoq.com/presentations/SpringOne-2GX-2012-Keynote-2), Adrian Colyer
+<!-- .element: class="caption" --> 
+
 ![](img_1a/app_clasica.png)
 
 ---
@@ -234,20 +237,24 @@ Omnipresente en la actualidad. Salvo las webs estáticas prácticamente **todo e
 
 ---
 
-<!-- .element: class="caption" --> [Geek & Poke, sin AJAX vs. con AJAX](http://geekandpoke.typepad.com/geekandpoke/2012/01/simply-explained.html)
+[Geek & Poke, sin AJAX vs. con AJAX](http://geekandpoke.typepad.com/geekandpoke/2012/01/simply-explained.html)
+<!-- .element: class="caption" --> 
 
-<div class="stretch">![](img_1a/AJAX_vs_NO.png)</div>
+![](img_1a/AJAX_vs_NO.png)
+
 
 ---
 
 ## Arquitectura de app web "moderna"
 
 Gracias a AJAX y a Javascript nos podemos llevar **casi todo el código de la aplicación al navegador**, convirtiendo el servidor simplemente en un **API remoto** para guardar/recuperar datos
-<div class="caption">Charla: [The New Application Architectures](http://www.infoq.com/presentations/SpringOne-2GX-2012-Keynote-2), Adrian Colyer</div>
 
-<div class="stretch"> 
+Charla: [The New Application Architectures](http://www.infoq.com/presentations/SpringOne-2GX-2012-Keynote-2), Adrian Colyer
+<!-- .element: class="caption" -->
+
+
 ![](img_1a/modern_webapp.png) 
-</div>
+
 
 ---
 
@@ -298,7 +305,8 @@ En 2010 Twitter [cambió su arquitectura *frontend*](https://blog.twitter.com/en
 
 >[...] we discovered that the raw parsing and execution of JavaScript caused massive outliers in perceived rendering speed. **In our fully client-side architecture, you don’t see anything until our JavaScript is downloaded and executed**. The problem is further exacerbated if you do not have a high-specification machine or if you’re running an older browser. The bottom line is that **a client-side architecture leads to slower performance** [...]
 
-<div class="caption">["Improving performance on Twitter.com"](https://blog.twitter.com/2012/improving-performance-on-twittercom), del [Blog de *engineering* de Twitter](https://blog.twitter.com/engineering/en_us.html)</div>
+["Improving performance on Twitter.com"](https://blog.twitter.com/2012/improving-performance-on-twittercom), del [Blog de *engineering* de Twitter](https://blog.twitter.com/engineering/en_us.html)
+<!-- .element: class="caption" -->
 
 
 
@@ -311,7 +319,8 @@ En el **primer acceso** el servidor envía **HTML** "estático", como en una app
 Los *frameworks* de desarrollo en el cliente empiezan a incorporar mecanismos que facilitan implementar esto, p.ej. [Angular Universal](https://universal.angular.io)
 
 
-<div class="stretch">![](img_1a/angular_universal.png)</div>
+![](img_1a/angular_universal.png) <!-- .element: class="stretch" -->
+
 
 
 ---

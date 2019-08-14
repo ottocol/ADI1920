@@ -128,7 +128,8 @@ curl -v -H "Content-Type: application/json" \
   -d '{"name":"NuevoRepo","description":"Repo de prueba"}' \
   https://api.github.com/user/repos 
 ```
-[https://repl.it/repls/CanineVelvetyGreyware](https://repl.it/repls/CanineVelvetyGreyware)
+Podéis probarlo en [https://repl.it/repls/CanineVelvetyGreyware](https://repl.it/repls/CanineVelvetyGreyware) (cambiar en el `main.sh` el usuario por el vuestro de github y darle al botón "run") 
+<!-- .element: class="caption" -->
 
 ---
 
@@ -152,7 +153,6 @@ Location: https://api.github.com/repos/octocat/Hello-World
 - Método HTTP **PUT**
 - **Nuevos datos**: según la ortodoxia REST, actualizar significaría enviar TODOS los datos del recurso, incluso los que no cambian.
 - **PATCH**: cambiar solo ciertos datos. No está tan difundido como PUT al ser una adición más reciente a HTTP.
-
 - **Resultados posibles**:  **204** (Recurso modificado correctamente, no hay nada que añadir :) ), **404** (recurso no existente), Errores ya vistos con POST (**400**, **401**, **500**, ...)
 
 ---
@@ -405,10 +405,10 @@ https://graph.facebook.com/me/albums?limit=25&after=MTAxNTExOTQ1MjAwNzI5NDE=
 
 ---
 
-## Buenas prácticas
+## Algunas buenas prácticas
 
 
-- **No sorprender** a los usuarios del API (estos son los **desarrolladores** que van a implementar *apps* o webs que lo usen, no los usuarios finales de las *apps* o de las webs)
+- **Consistencia** en el diseño del API (estos son los **desarrolladores** que van a implementar *apps* o webs que lo usen, no los usuarios finales de las *apps* o de las webs)
 - Centrarse en los **casos de uso**
 - **Formalizar la API** antes de implementarla (diseño por contrato, *design first*)
 
@@ -423,7 +423,9 @@ Seguir en lo posible las **convenciones estándar** (en nuestro caso, REST)
 Pregunta: ¿Qué convenciones REST **no** se están respetando en esta llamada al API "REST" de Twitter que borra un tweet dado su *id*?
 
 ![](img_1c/twitter_API.png)
-<div class="caption">De la [documentación del API de Twitter](https://dev.twitter.com/rest/reference)</div>
+
+De la [documentación del API de Twitter](https://dev.twitter.com/rest/reference)
+<!-- .element: class="caption" -->
 
 
 ---
@@ -458,17 +460,17 @@ Existen varios lenguajes especialmente creados para **especificar APIs REST** qu
 
 <div class="row clearfix">
     <div class="column third">
-      ![](img_1c/apiblueprint-logo-2.png)
-      <div class="caption">[API Blueprint](https://apiblueprint.org/)</div>
+      <img src="img_1c/apiblueprint-logo-2.png">
+      <a href="https://apiblueprint.org/" class="caption">API Blueprint]</a>
     </div>
     <div class="column third">
-      ![](img_1c/swagger.png)   
-      <div class="caption">[Swagger](https://swagger.io/)</div>
+      <img src="img_1c/swagger.png"> 
+      <a href="https://swagger.io/" class="caption">Swagger</a>
     </div>
     <div class="column third">
-      ![](img_1c/raml.png)   
-      <div class="caption">[RAML](https://raml.org/)</div>
-      <div class="caption">[Ejemplo de API](http://static-anypoint-mulesoft-com.s3.amazonaws.com/API_examples_notebooks/raml-design3.html)</div>
+      <img src="img_1c/raml.png">   
+      <a href="https://raml.org/" class="caption">RAML</a>
+      <a href="http://static-anypoint-mulesoft-com.s3.amazonaws.com/API_examples_notebooks/raml-design3.html" class="caption">Ejemplo de API</a>
       </div>
 </div>
 
@@ -560,7 +562,7 @@ console.log(uuid())   //176c8ba0-9cb6-11e7-abab-7df31ea5be22
 
 - Hace unos años, todos los APIs devolvían solo XML, ahora casi todos usan solo JSON
 
-<div class="stretch">![](https://img.devrant.io/devrant/rant/r_111482_unPBx.jpg)</div>
+![](https://img.devrant.io/devrant/rant/r_111482_unPBx.jpg)
 
 - Si queremos que nuestro API admita y sirva varios formatos de datos, se considera una buena práctica que cliente y servidor puedan "**negociar**" el formato más adecuado para ambos
 
@@ -570,7 +572,6 @@ console.log(uuid())   //176c8ba0-9cb6-11e7-abab-7df31ea5be22
 ## Cómo negociar el formato según la ortodoxia REST
 
 - Cliente -> servidor: cabecera `Accept` en la petición
-
 ```http
 Accept: application/json;q=1.0, application/xml;q=0.5, */*;q=0.0
 ```
@@ -583,10 +584,8 @@ Accept: application/json;q=1.0, application/xml;q=0.5, */*;q=0.0
 
 ## Cómo se negocia el formato en el "mundo real"
 
-- Depende del API:
- - Parámetros HTTP
- - Especificado en la URL
- - ...
+Depende del API, en algunos se hace con **parámetros HTTP**, en otros es **parte de la URL** (generalmente como si fuera una extensión de archivo: `.xml`, `.json`,...)
+
 
 ```http
 https://api.twitter.com/1.1/search/tweets.json
@@ -654,7 +653,8 @@ Imitar el funcionamiento de la web, en la que para seguir los pasos en un flujo 
 
 La idea de HATEOAS es que al final el API es como una máquina de estados y pasamos de un estado a otro haciendo peticiones
 
-<!-- .element: class="stretch" -->![](https://eamodeorubio.files.wordpress.com/2012/09/order_state_machine.png)
+![](https://eamodeorubio.files.wordpress.com/2012/09/order_state_machine.png)
+<!-- .element: class="stretch" -->
 
 ---
 
