@@ -42,7 +42,7 @@ Además de la documentación anterior, como mínimo todas las prácticas deben c
 
 Se deben implementar al menos 7 llamadas distintas al API (más la de autentificación, o *login*, que se describe en el apartado siguiente). Debe haber al menos dos casos de GET (1 de lectura de un recurso sabiendo su `id` y 1 de lectura de una colección), y al menos un caso de POST, PUT y DELETE. Esto nos da 5 llamadas. Las dos restantes pueden ser del tipo que queráis.  
 
-Se debe realizar *testing* de todas las llamadas al API. Se propone usar Mocha y supertest, pero en su lugar podéis usar las herramientas que deseéis, por ejemplo con [Postman](https://www.getpostman.com/) se pueden [hacer *scripts* para *tests*](https://www.getpostman.com/docs/v6/postman/scripts/test_scripts) con un código JS muy sencillo
+Se debe realizar *testing* de todas las llamadas al API. Se propone usar Mocha y supertest, pero en su lugar podéis usar las herramientas que deseéis, por ejemplo con [Postman](https://www.getpostman.com/) se pueden [hacer *scripts* para *tests*](https://www.getpostman.com/docs/v6/postman/scripts/test_scripts) con un código JS muy sencillo.
 
 ### Autentificación
 
@@ -50,9 +50,11 @@ El API debe permitir autentificación mediante JSON web token (*se explicará en
 
 En el contexto de JSON Web token "hacer login en la aplicación" es realmente "obtener el token". Mapeadlo con una petición POST a la URL que queráis, pasando en la petición HTTP el login y el password en JSON y obteniendo como resultado en *token* en el cuerpo de la respuesta. Esta es una llamada adicional a las otras 7 que debéis implementar.
 
-### Persistencia de datos
+### Datos estáticos
 
-En principio los datos devueltos por el API y que se creen a través de él se almacenarán en memoria, como hacemos en el ejemplo de la lista de la compra. Podéis usar la estructura de datos que queráis. Si en lugar de guardar datos en memoria usáis una base de datos se os contará como requisito adicional.
+En principio **los datos pueden ser estáticos, no modificables y estar almacenados en memoria**. Para almacenarlos podéis usar la estructura de datos que queráis. Es decir desde el punto de vista de los datos el API no es más que un *mockup*. 
+
+De este modo las peticiones de tipo GET siempre devolverán los mismos datos fijos y las peticiones que modifiquen datos (POST/PUT/DELETE) devolverán al cliente el código de estado correspondiente pero en realidad no modificarán nada (por ejemplo devolver un 201 si se solicita borrar una entidad aunque en la realidad no se borre y al hacer luego GET siga existiendo. No obstante el API debería comprobar que la operación tiene sentido (por ejemplo devolver un 404 si se intenta borrar una entidad que no existe).
 
 Para inicializar los datos en memoria o en la BD podéis ayudaros de herramientas como [`faker.js`](https://github.com/marak/Faker.js/), se mostrará brevemente su uso en clase.
 
@@ -60,7 +62,7 @@ Para inicializar los datos en memoria o en la BD podéis ayudaros de herramienta
 
 Para poder puntuar estos requisitos es necesario haber implementado correctamente los requisitos mínimos. De este apartado podéis elegir los requerimientos que deseéis.
 
-**(2 puntos)** Implementar la persistencia del API con base de datos. Podéis usar para ello la base de datos y las librerías de acceso que queráis. En caso de implementar este apartado no es necesario guardar además los datos en memoria.
+**(2 puntos)** Implementar la persistencia del API con base de datos. Podéis usar para ello la base de datos y las librerías de acceso que queráis. En caso de implementar este apartado no es necesario guardar además los datos en memoria. En el código JS se deben separar aparte las funcionalidades de persistencia, es decir en una función de *routing* de express no debería aparecer código de base de datos, sino estar en funciones o clases aparte. Así, al examinar el código express no deberíamos poder decir qué base de datos estamos usando, ni las funciones de BD deberían contener referencias a express.
 
 **(0,5-1 punto)** Implementar el acceso real a un API externo para cumplir con alguna funcionalidad. Por ejemplo supongamos un sitio de búsqueda de hoteles en ciertas fechas que en la ficha de cada hotel incuye el tiempo que va a hacer ese día, obtenido de un API externo. Si en este apartado os ayudáis de cualquier librería JS/paquete npm adicional solo se valorará como 0.5 puntos (ya que hay paquetes que lo implementan todo y en este caso el trabajo sería solo encontrar el paquete y leer la documentación).
 
