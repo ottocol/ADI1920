@@ -322,19 +322,25 @@ var persona = {
 
 - Cuando creamos un objeto podemos especificar cuál queremos que sea su *prototipo*. Si el objeto no tiene una propiedad, se buscará en el prototipo
 
-
+[https://repl.it/@ottocol/SuddenCorruptObjectcode](https://repl.it/@ottocol/SuddenCorruptObjectcode)
 ```javascript
-var unObjeto = {
+var original = {
   valor: 1,
   saludar: function() {
     return "hola, qué tal";
   }
 }
 
-//El prototipo de "otroObjeto" es "unObjeto"
-var otroObjeto = Object.create(unObjeto);
-console.log(otroObjeto.valor) //1
-console.log(otroObjeto.saludar()) //"hola, qué tal"
+//El prototipo de "descendiente" es "original"
+var descendiente = Object.create(original);
+console.log(descendiente.valor) //1
+console.log(descendiente.hasOwnProperty("valor")) //nos dice que la propiedad no está directamente en descendiente
+console.log(descendiente.saludar()) //"hola, qué tal"
+original.valor = 0
+console.log(descendiente.valor) //0, el valor se comparte!!
+descendiente.valor = 1  //Aquí estamos creando una propiedad nueva en descendiente
+console.log(original.valor) //por eso esta no cambia
+console.log(descendiente.hasOwnProperty("valor")) //Ahora será true```
 ```
 
 - Si un objeto no tiene una propiedad, se buscará en su prototipo. Si sigue sin encontrarse, se irá al prototipo del prototipo, y así sucesivamente hasta llegar a `Object.prototype`.
