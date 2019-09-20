@@ -52,6 +52,8 @@ Comenzaremos por **instalar un paquete** para un proyecto. **En Node es habitual
 $ npm install colors  #o, más sencillo, "npm i colors"
 ```
 
+> Al ejecutar el comando anterior veremos varios *warnings* en la consola (`WARN`), indicando que falta un archivo `package.json`. Aunque "lo suyo" sería crearlo, vamos a obviarlo de momento hasta que lo expliquemos en la sección siguiente.
+
 El comando anterior **crea un subdirectorio `node_modules` en el directorio actual**, conteniendo el código del paquete `colors` (y los paquetes de los que depende, si los hubiera).
 
 > Nótese que si distintos proyectos en los que estamos trabajando comparten dependencias, estas estarán repetidas en cada proyecto, ya que no tenemos un repositorio centralizado local (como sí pasa por ejemplo en Maven). De este modo evitamos problemas de versionado de dependencias, ya que cada proyecto usa directamente la versión que necesita, pero a costa de duplicar la información.
