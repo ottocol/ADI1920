@@ -1,11 +1,4 @@
 # Software necesario para ADI 19/20
-
-Tienes dos opciones:
-
-- Usar una máquina virtual de virtualbox con todo el software preinstalado, puedes descargarla [aquí](https://drive.google.com/open?id=1j6UPjdVxaqjSLKKjOCSwwF8KX9Nq400y) (unos 2 Gb comprimida) 
-- Instalar el software de forma nativa como se explica a continuación. No es complicado, en los laboratorios usamos la máquina virtual solo por cuestiones técnicas.
-
-> Todo lo que viene a continuación se aplica **solo si no usas la máquina virtual**
  
 ## Node
 
