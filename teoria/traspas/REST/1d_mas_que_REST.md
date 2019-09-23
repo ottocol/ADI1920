@@ -124,7 +124,7 @@ var client = new HelloSvcClient(protocol);
 var msg = client.hello_func();
 ```
 
-<span class="caption">[HMTML completo (ejemplo de cliente Thrift desde el navegador)](https://github.com/apache/thrift/blob/master/lib/nodejs/examples/hello.html)</span>
+<span class="caption">[HTML completo (ejemplo de cliente Thrift desde el navegador)](https://github.com/apache/thrift/blob/master/lib/nodejs/examples/hello.html)</span>
 
 ---
 
@@ -482,9 +482,30 @@ De [Polling vs SSE vs WebSocket— How to choose the right one](https://codeburs
  + **Unidireccionales**, siempre desde el servidor al cliente
  + Mensajes de **texto**
  + Funciona sobre **HTTP**
- + El API solo está soportado en Edge [desde versiones recientes](https://caniuse.com/#feat=eventsource) 
+ + [Amplio soporte](https://caniuse.com/#feat=eventsource) en navegadores actuales (en Edge debe ser una versión reciente)
 
 ---
+
+## Formato de los eventos
+
+- El tipo MIME debe ser `text/event-stream`
+- Cada evento es una línea que comienza por `data:`. Un evento puede ocupar varias líneas
+
+```javascript
+data: esto es un mensaje
+
+data: este es otro, y tiene
+data: dos líneas
+```
+- Se puede especificar un tipo de evento con una línea que comienza por `event:` y una etiqueta arbitraria 
+
+```javascript
+event: login
+data: usuario533
+```
+
+---
+
 
 ## Ejemplo de SSE
 
