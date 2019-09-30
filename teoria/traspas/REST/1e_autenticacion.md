@@ -116,7 +116,7 @@ app.get('/doLogin', function(pet, resp) {
          resp.send("OK, tienes permiso");
      else {
          resp.status(401);
-         resp.send("Debes autentificarte");
+         resp.send("Debes autenticarte");
      }
  });
 
@@ -144,12 +144,12 @@ function checkAuth(pet, resp, next) {
         next();
     else {
         resp.status(401);
-        resp.send("Debes autentificarte");      
+        resp.send("Debes autenticarte");      
     }
 }
 
 app.get('/restringido2', checkAuth, function(pet, resp) {
-    resp.send("Si estás viendo esto es que eres importante!!!");
+    resp.send("Si estás viendo esto es que te has autenticado!!!");
 });
 ```
 
@@ -205,9 +205,9 @@ Authorization: Basic cGVwaXRvOjEyMzQ1Ng==
 ## HTTP Basic en una *app*. Qué ve el usuario final
 
 1. El usuario introduce *login* y *password* en un formulario, y se hace una llamada al API simplemente para **comprobar que son correctos** (el API debería ofrecer esta operación)
-    - Si son OK, se **almacenan en el navegador** (típicamente con un API llamado *Local Storage*)
+    - Si son OK, se **almacenan en el navegador** (típicamente con un API muy sencillo de usar llamado *Local Storage*)
     - Si son incorrectos se muestra error
-2. Como las credenciales están almacenadas en el navegador, con Javascript podemos adjuntarlas en cada petición al API
+2. Como las credenciales están almacenadas en el navegador, con Javascript podemos adjuntarlas en cada petición al API (veremos ejemplos en el tema 2)
 
 ---
 
@@ -258,8 +258,10 @@ Si no queremos que aparezca, habrá que "saltarse" el estándar (*status* distin
 1.  Cuando se hace *login* el servidor nos devuelve un **token** (valor idealmente único e imposible de falsear)
 2.  Para cualquier operación restringida debemos **enviar el token en la petición**
 
-<div class="stretch">![](https://media2.wnyc.org/i/800/0/l/80/1/2003_44_2_SubwayToken_verso.jpg)</div>
-<div class="caption"> Un *token* en el mundo real</div>
+![](https://media2.wnyc.org/i/800/0/l/80/1/2003_44_2_SubwayToken_verso.jpg) <!-- .element class="stretch" --> 
+
+Un "token" en el mundo real  <!-- .element class="caption" -->
+
 
 ---
 
@@ -274,8 +276,8 @@ Similar a las *cookies* ya que estamos enviando un identificador del cliente en 
 
 *   [Estándar IETF](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html). Hay implementación en multitud de lenguajes.
 *   Es una cadena en formato JSON formada por 3 partes:
-    1.  **Cabecera**: indica el tipo de token y el algoritmo de firma. Se codifica en Base64\. Ejemplo: `{"typ"=>"JWT", "alg"=>"HS256"}` (indica que esto es un "JWT" y se firmará con HMAC SHA-256)
-    2.  **Payload**: lo que queremos almacenar en el token en formato JSON (p.ej. `{"login"=>"adi"}`) y codificado en Base64URL
+    1.  **Cabecera**: indica el tipo de token y el algoritmo de firma. Se codifica en Base64\. Ejemplo: `{"typ":"JWT", "alg":"HS256"}` (indica que esto es un "JWT" y se firmará con HMAC SHA-256)
+    2.  **Payload**: lo que queremos almacenar en el token en formato JSON (p.ej. `{"login":"adi"}`) y codificado en Base64URL
     3.  **Firma**: se aplica un algoritmo de _hash_ sobre la cabecera, el payload y una clave secreta que solo conoce el servidor y se pasa a Base64URL
     4.  Las tres partes se concatenan con '.'
 
@@ -289,7 +291,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJob2xhIjoibXVuZG8ifQ.pJPDprjxsouVfaaXau-F
 ## Comprobar si un JWT es auténtico
 
 *   El servidor toma la cabecera y el _payload_ (recordar que no están cifrados, solo en Base64) y la clave secreta, y vuelve a aplicar el _hash_. Si no coincide con la firma, el token no es válido.
-*   En teoría no se puede generar un token si no se conoce la clave secreta, y esta no se puede averiguar a partir de un token auténtico
+*   En teoría no se puede generar un token si no se conoce la clave secreta, y esta no se puede averiguar a partir de un token auténtico (el *hash* no es invertible)
 *   Recordar que, **todo se transmite "en claro"**: Base64 es una codificación, no un cifrado. Por tanto normalmente habrá que usar HTTPS si no se quiere que el _payload_ sea legible
 
 ---
@@ -297,7 +299,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJob2xhIjoibXVuZG8ifQ.pJPDprjxsouVfaaXau-F
 ## Fecha de expiración
 
 * En el _payload_ se suele incluir una fecha de expiración del _token_. En el estándar se especifica el uso de `exp` (con el nº segundos desde el 1/1/1970). Si el *token* ya ha expirado el servidor debería devolver el *status* 401
-* De paso solucionamos el problema de que el mismo _payload_ siempre genera el mismo JWT si no cambiamos el _secret_ (lo que permitiría generar *tokens* falsos)
+* De paso solucionamos el problema de que el mismo _payload_ siempre genera el mismo JWT si no cambiamos el _secret_ 
 
 ---
 
@@ -364,7 +366,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 
 ---
 
-¡Cuidado!: almacenar información sensible como *tokens* JWT en el "local storage" podría acarrear problemas de seguridad ya que otro código JS en la misma página tiene acceso a él (vulnerabilidad XSS o *Cross-Site Scrpipting*)
+¡Cuidado!: almacenar información sensible como *tokens* JWT en el "local storage" podría acarrear problemas de seguridad ya que otro código JS en la misma página tiene acceso a él (susceptible a vulnerabilidad XSS o *Cross-Site Scripting*)
 
 - [https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage](https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage)
 - [https://stackoverflow.com/questions/44133536/is-it-safe-to-store-a-jwt-in-localstorage-with-reactjs](https://stackoverflow.com/questions/44133536/is-it-safe-to-store-a-jwt-in-localstorage-with-reactjs)
@@ -399,8 +401,10 @@ Con respecto a las *cookies*
 - Protocolo de autenticación diseñado originalmente para cuando nuestra aplicación quiere acceder al API de un tercero pero el usuario no está dispuesto a confiarnos su *password*
 - Solución: el usuario se autentifica directamente con el API del tercero y este nos cede un *token*, válido durante un tiempo. Si hay problemas es mucho más sencillo anular el *token* que cambiar el password
 
-<div class="stretch">![](img_1e/oauth-twitter-3-legs.png)</div>
+---
 
+<!-- .element class="stretch" -->
+![](img_1e/oauth-twitter-3-legs.png)
 
 ---
 
@@ -415,7 +419,7 @@ Como resultado, OAuth se ha convertido en el **estándar de autenticación "de f
 - La versión actual es la 2, una simplificación de la original, que tenía fama de ser muy complicada
 - Tutoriales interesantes para más información:
     - [*Mitchell Anicas*, An introduction to OAuth 2](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2)
-    -  [*Aaron Parecki*, OAuth 2 simplified]https://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified)
+    -  [*Aaron Parecki*, OAuth 2 simplified](https://aaronparecki.com/articles/2012/07/29/1/oauth2-simplified)
 
 
 
