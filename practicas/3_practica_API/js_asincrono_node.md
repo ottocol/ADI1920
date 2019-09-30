@@ -25,7 +25,7 @@ var password_busc = "pepe"
 knex.select()
     .from('usuarios')
     .where({login:login_busc, password:password_busc})
-    .asCallback(function(filas){
+    .asCallback(function(error, filas){
         //filas es un array de objetos con los datos. Si está vacío es que no existía ese usuario con ese password
         if (filas.length>0)
           console.log('Usuario OK')
@@ -50,7 +50,7 @@ function chequeaCredenciales(login, password) {
   knex.select()
     .from('usuarios')
     .where({login:login_busc, password:password_busc})
-    .asCallback(function(filas){
+    .asCallback(function(error, filas){
         //filas es un array de objetos con los datos. Si está vacío es que no existía ese usuario con ese password
         if (filas.length>0)
           return true
@@ -68,13 +68,69 @@ app.post('/usuarios/check', function(pet, resp) {
   var result = chequeaCredenciales(body.login, body.password)
   if (result)
      resp.status(200)
+     resp.send({user:body.login, password:body.password})
   else
      resp.status(403)
+     resp.end()
 })
 ```
 > ¿Por qué crees que este código no funciona?. Pistas: ¿dónde están los `return` de `chequeaCredenciales`, son de verdad de esta función? ¿Qué crees que se ejecutará antes, el mensaje de "fin de chequeo" o el código que devuelve true/false?.
 
 El problema es que el código asíncrono es totalmente distinto al código secuencial al que estamos acostumbrados. Con él nos tenemos que olvidar de la idea de "llamo a una función y obtengo el valor que habrá devuelto con `return`".
+
+La clave es que hay que realizar el envío de la respuesta inmediatamente tras darnos cuenta de que las credenciales son correctas, algo como:
+
+```javascript
+app.post('/usuarios/check', function(pet, resp) {
+  var body = pet.body
+  knex.select()
+    .from('usuarios')
+    .where({login:body.login, password:body.password})
+    .asCallback(function(error, filas){
+      if (filas.length>0) {
+        resp.status(200)
+        resp.send("Usuario OK")
+      }
+      else {
+        resp.status(403)
+        resp.send("Usuario y/o contraseña incorrectos")
+      }  
+    })
+})
+
+app.listen(3000, function(){
+  console.log("Servidor inicializado en el puerto 3000...")
+})
+```
+
+El problema del código anterior es que no es modular, no hemos separado la funcionalidad de `chequearCredenciales` como antes. La clave para poder modularizar de nuevo el código es que el `resp.status()` y el `resp.send()` se deben ejecutar **desde dentro de `chequearCredenciales`**. Una posibilidad sería pasarle el objeto `resp` a `chequearCredenciales`, pero es una solución un poco "sucia" ya que estamos introduciendo dependencias extrañas en la función. Lo que podemos hacer es de nuevo usar la idea de *callback*, pasándole a `chequearCredenciales` una función a ejecutar cuando acabe el chequeo. Puede parecer raro o retorcido pero en realidad así es como trabajan las funciones asíncronas de knex. El código podría quedar como:
+
+```javascript
+function chequeaCredenciales(login_busc, password_busc, success_callback, error_callback) {
+  knex.select()
+    .from('usuarios')
+    .where({login:login_busc, password:password_busc})
+    .asCallback(function(error, filas){
+        if (filas.length>0)
+          success_callback()
+        else
+          error_callback()     
+    })
+}
+
+app.post('/usuarios/check', function(pet, resp) {
+  var body = pet.body
+  chequeaCredenciales(body.login, body.password, 
+    function(){
+      resp.status(200)
+      resp.send("usuario OK")
+    },
+    function() {
+      resp.status(403)
+      resp.send("Usuario y/o contraseña incorrectos")
+    })
+})
+```
 
 
 ## Mecanismos para la ejecución de código asíncrono en JS
