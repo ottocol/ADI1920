@@ -46,10 +46,10 @@ Si quisiéramos reutilizar el código anterior para chequear una operación de l
 //faltaría toda la parte de inicialización de Knex
 //...
 
-function chequeaCredenciales(login, password) {
+function chequeaCredenciales(un_login, un_password) {
   knex.select()
     .from('usuarios')
-    .where({login:login_busc, password:password_busc})
+    .where({login:un_login, password:un_password})
     .asCallback(function(error, filas){
         //filas es un array de objetos con los datos. Si está vacío es que no existía ese usuario con ese password
         if (filas.length>0)
@@ -68,10 +68,10 @@ app.post('/usuarios/check', function(pet, resp) {
   var result = chequeaCredenciales(body.login, body.password)
   if (result)
      resp.status(200)
-     resp.send({user:body.login, password:body.password})
+     resp.send("Usuario OK")
   else
      resp.status(403)
-     resp.end()
+     resp.send("Usuario y/o contraseña erróneos")
 })
 ```
 > ¿Por qué crees que este código no funciona?. Pistas: ¿dónde están los `return` de `chequeaCredenciales`, son de verdad de esta función? ¿Qué crees que se ejecutará antes, el mensaje de "fin de chequeo" o el código que devuelve true/false?.
