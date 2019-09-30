@@ -62,7 +62,7 @@ function chequeaCredenciales(login, password) {
 
 //Faltaría la parte de configuración e inicialización de express
 //...
-app.get('/usuarios/check', function(pet, resp) {
+app.post('/usuarios/check', function(pet, resp) {
   //supongamos que el login y password a chequear vienen en el body en JSON
   var body = pet.body
   var result = chequeaCredenciales(body.login, body.password)
