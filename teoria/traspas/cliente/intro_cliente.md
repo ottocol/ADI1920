@@ -24,7 +24,7 @@
 
 ## Transpilación
 
-- Como solución, se pueden usar compiladores (*[transpiladores](https://en.wikipedia.org/wiki/Source-to-source_compiler)*) que **traduzcan de las versiones nuevas de Javascript a, por ejemplo, ES5**  (sí soportado al 100% nativamente). 
+- Como solución, se pueden usar compiladores ([*transpiladores*](https://en.wikipedia.org/wiki/Source-to-source_compiler)) que **traduzcan de las versiones nuevas de Javascript a, por ejemplo, ES5**  (sí soportado al 100% nativamente). 
 - El transpilador más usado actualmente es [**Babel**](https://babeljs.io/)
 - Para el caso ES6->ES5 cada vez es más superfluo usar un transpilador, por haber un soporte nativo amplio de ES6, pero se sigue usando para dar soporte a navegadores *legacy* y para poder emplear funcionalidades >ES6 
 
@@ -32,7 +32,7 @@
 
 ![](images_intro/sebmck.png)
 
-Babel lo empezó a escribir Sebastian McKenzie a los 17 años mientras estaba en el instituto (ahora trabaja en Facebook). El propio Sebastian cuenta la historia de esta época [aquí](https://medium.com/@sebmck/2015-in-review-51ac7035e272#.1vfchy3bc) 
+Como curiosidad: Babel lo empezó a escribir Sebastian McKenzie a los 17 años mientras estaba en el instituto (ahora trabaja en Facebook). El propio Sebastian cuenta [la historia de esta época](https://medium.com/@sebmck/2015-in-review-51ac7035e272#.1vfchy3bc) 
 
 ---
 
@@ -140,9 +140,9 @@ HTML:
 
 ## Un problema de los módulos ES6 
 
-- Aunque a fecha de hoy (octubre 2018) la mayoría de navegadores [los implementan](https://caniuse.com/#search=modules), esto es relativamente reciente.
-- Antes de esto, a alguien se le ocurrió la idea de añadir "soporte" CommonJS al navegador mediante una herramienta llamada *bundler*
-- Como resultado, desde hace unos años **muchas dependencias de terceros se distribuyen** con `npm`, **en** formato **CommonJS** (no soportado nativamente por los navegadores). Es decir, podríamos [usar módulos ES6 para nuestro propio código](https://salomvary.com/es6-modules-in-browsers.html) pero es difícil usarlos con librerías de terceros (Angular, React, ...)
+- Aunque a fecha de hoy la mayoría de navegadores [los implementan](https://caniuse.com/#search=modules), esto es relativamente reciente.
+- Antes de esto, a alguien se le ocurrió la idea de añadir soporte para CommonJS al navegador mediante una herramienta llamada *bundler*
+- Como resultado, desde hace unos años **muchas dependencias de terceros se distribuyen** con `npm`, **en** formato **CommonJS** (no soportado nativamente por los navegadores). Es decir, podemos [usar módulos ES6 para nuestro propio código](https://salomvary.com/es6-modules-in-browsers.html) pero es difícil usarlos con librerías de terceros (Angular, React, ...)
 
 
 
@@ -159,6 +159,7 @@ HTML:
   * copiar los *assets* (jpg, png, ...)
   * ...
 - Ejemplos: webpack, parcel, rollup, browserify, jspm, ...
+- Veremos su uso en prácticas
 
 
 ---
@@ -244,8 +245,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 Los eventos sobre un nodo del DOM *suben*  hacia arriba en la jerarquía de nodos (*bubbling up*), de modo que podemos capturarlos también en niveles superiores.
 
-<!-- .element class="caption" -->[https://jsbin.com/buvoyif/edit?html,js,console,output](https://jsbin.com/buvoyif/edit?html,js,console,output)
-
 ```html
 <body>
   <button id="boton">Pulsa aquí</button>
@@ -258,16 +257,15 @@ document.getElementById('boton').addEventListener('click', function(e) {
   //si ponemos esto, paramos el bubbling
   //e.stopPropagation()
 })
-
 //Aquí recibiríamos también los clicks sobre el <button> y el <p>
 document.addEventListener('click', function(e){
-  //En un listener, this es el objeto al que está vinculado el evento.
-  //En este caso, document
+  //En un listener, this es el objeto al que está vinculado el evento.Aquí document
   console.log("this es " + this.nodeName) //document
   //target es el "objetivo" del evento. P.ej. si clicamos en el boton será este
   console.log('click sobre ' + e.target.nodeName)
 })
 ```
+[https://jsbin.com/buvoyif/edit?html,js,console,output](https://jsbin.com/buvoyif/edit?html,js,console,output)<!-- .element class="caption" -->
 
 ---
 
@@ -335,7 +333,7 @@ Tiene "mala prensa" porque mezcla JS y HTML
 
 **DOM** (*Document Object Model*): por cada etiqueta o componente del HTML actual hay en memoria un objeto Javascript equivalente. 
 
-Los objetos JS forman un árbol en memoria, de modo que un nodo del árbol es *"hijo"* de otro si el elemento HTML correspondiente está *dentro* del otro.
+Los objetos JS forman un árbol en memoria, de modo que un nodo del árbol es "hijo" de otro si el elemento HTML correspondiente está *dentro* del otro.
 
 **API DOM**: conjunto de APIs que nos permite acceder al DOM y manipularlo. Al manipular los objetos JS estamos cambiando indirectamente el HTML *en vivo* 
 
@@ -472,16 +470,22 @@ La mayoría de *frameworks Javascript* nos liberan de la necesidad de modificar 
 
 - En algunos podemos **vincular**  elementos HTML con partes del modelo, de manera que se **actualicen automáticamente** (*binding*). Ejemplos: Knockout, Angular, Vue,...
 - En otros simplemente **repintamos el HTML entero** y el *framework* se encarga de modificar solo las partes que cambian. Por ejemplo React
-=======
-- En algunos podemos **vincular**  elementos HTML con propiedades del modelo, y se **actualizarán automáticamente** (*binding*). Ejemplos: Knockout, Angular, Vue...
-- En otros **repintamos el HTML entero** y el *framework* modifica solo las partes que cambian. Por ejemplo, React.
 
-[https://jsbin.com/qikaxef/edit?html,js,console,output](https://jsbin.com/qikaxef/edit?html,js,console,output) <!-- .element: class="caption" -->
+Lo veremos con detalle en el tema siguiente, de momento un ejemplo sencillo...
+
+---
+
+## Ejemplo con Vue
+
+[https://jsbin.com/nahikon/edit?html,js,output](https://jsbin.com/nahikon/edit?html,js,output) <!-- .element: class="caption" -->
 
 ```html
 <div id="app">
-  <input type="text" v-model="mensaje"><br>
-  <h1>{{mensaje}}<h1>
+  Tu nombre: <input type="text" v-model="nombre"><br>
+  <button v-on:click="generarPuesto">Generar puesto</button>
+  <div class="tarjeta">
+      {{nombre}} <br> {{puesto}}
+  </div>  
 </div>    
 ```
  
@@ -489,12 +493,16 @@ La mayoría de *frameworks Javascript* nos liberan de la necesidad de modificar 
 var app = new Vue({
    el:'#app',
    data: {
-     mensaje: "Bienvenido a Vue"
-   } 
+     nombre: "",
+     puesto: ""
+   },
+   methods: {
+     generarPuesto: function() {
+       this.puesto = faker.name.jobTitle()
+     }
+   }
  })
 ```
-
-Aclaración: en realidad, internamente React y Vue son mucho más similares de lo que parece de cara al desarrollador
 
 ---
 
@@ -535,7 +543,7 @@ Cadenas de texto delimitadas por *backticks* (\`...\`):
  - Permiten interpolar variables definidas previamente
  - Podemos usar expresiones, incluso llamar a funciones
 
-<!-- .element class="caption"-->[http://jsbin.com/nadaqa/edit?html,js,output](http://jsbin.com/nadaqa/edit?html,js,output)
+[http://jsbin.com/nadaqa/edit?html,js,output](http://jsbin.com/nadaqa/edit?html,js,output)<!-- .element class="caption"-->
 ```javascript
 var nombre = 'Pepe'
 var plantilla = `
@@ -629,7 +637,7 @@ document.getElementById('miBlog').innerHTML = resultado
 
 ---
 
-Muchos *frameworks* tienen formatos de plantillas propios. Por ejemplo en Angular o Vue se usa interpolación con sintaxis Mustache `{{}}` y atributos HTML propios (*directivas*) para iterar por listas, hacer *rendering* condicional,...
+Muchos *frameworks* tienen formatos de plantillas propios. Como hemos visto en Vue se usa sintaxis Mustache `{{}}` y atributos HTML propios (*directivas* en argot Vue) para iterar por listas, hacer *rendering* condicional,...
 
 [https://jsbin.com/jozijah/edit?html,js,output](https://jsbin.com/jozijah/edit?html,js,output)<!-- .element class="caption" -->
 
