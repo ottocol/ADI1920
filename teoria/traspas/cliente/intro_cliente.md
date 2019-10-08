@@ -398,6 +398,22 @@ var filasPares = document. querySelectorAll("tr:nth-child(2n)")
 
 ---
 
+## Relaciones "familiares" entre nodos
+
+Una vez accedemos a un nodo podemos acceder a su "padre", "hijos" o "hermanos" con una serie de propiedades:
+
+- Padre: `parentNode`
+- Hijos: array `childNodes`. `firstChild` es el primero, `lastChild` el último
+- Hermanos: siguiente `nextSibling`, `previousSibling`
+
+Y en un nodo tenemos su nombre (`nodeName`) y su valor (`nodeValue`)
+
+- Para las etiquetas, el nombre es la etiqueta en mayúsculas y sin `< >` y el valor `null`
+- Para los nodos de texto, el nombre siempre es `#text` y el valor su contenido
+- En los campos de formulario editables, el contenido no está en `nodeValue` sino en `value` 
+
+---
+
 ## Modificar/crear nodos
 
 La idea de modificar los nodos o crear otros nuevos para que cambie el HTML es muy **potente**, pero el API es **tedioso** de utilizar
