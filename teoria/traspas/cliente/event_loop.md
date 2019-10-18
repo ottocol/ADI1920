@@ -183,7 +183,7 @@ timer = setInterval(anim_frame,50)
 
 ## requestAnimationFrame
 
-Función especializada para las animaciones que nos asegura una sincronización precisa a 60FPS (ejemplo de [`setTimeout` vs `requestAnimationFrame`](https://codepen.io/klugjo/pen/zBYLOX)
+Función especializada para las animaciones que nos asegura una sincronización precisa a 60FPS (ejemplo de [`setTimeout` vs `requestAnimationFrame](https://codepen.io/klugjo/pen/zBYLOX)
 )
 
 Desde dentro del *callback* de `requestAnimationFrame` hay que llamar a requestAnimationFrame` igual que hacíamos con el `setTimeout`
