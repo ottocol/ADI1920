@@ -403,8 +403,12 @@ var filasPares = document. querySelectorAll("tr:nth-child(2n)")
 Una vez accedemos a un nodo podemos acceder a su "padre", "hijos" o "hermanos" con una serie de propiedades:
 
 - Padre: `parentNode`
-- Hijos: array `childNodes`. `firstChild` es el primero, `lastChild` el último
-- Hermanos: siguiente `nextSibling`, `previousSibling`
+- Hijos 
+  -  Solo los *tags*: array `children`. Primero=>`firstElementChild`, último=> `lastElementChild` 
+  -  Todos: array `childNodes`. Primero=>`firstChild`, Último=>`lastChild` 
+- Hermanos:
+  - Solo los *tags*: siguiente `nextElementSibling`, anterior `previousElementSibling`
+  - Todos: `nextSibling`, `previousSibling`
 
 Y en un nodo tenemos su nombre (`nodeName`) y su valor (`nodeValue`)
 
