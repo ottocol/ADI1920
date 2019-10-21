@@ -13,12 +13,24 @@
 
 ---
 
+`setTimeout` nos permite ejecutar una función pasado un número de milisegundos, sería algo así como ejecutar una función tras un *delay*
+
+```javascript
+setTimeout(function() {
+  console.log('hola')
+}, 3000)
+```
+
+---
+
+## WAT?
 
 ```javascript
 setTimeout(function(){
   console.log("Esto debería aparecer primero");
 }, 0);
-console.log("Sorpresa!");
+for(i=1;i<=1000;i++)
+  console.log("Sorpresa!");
 ```
 [https://jsbin.com/bibifan/edit?js,console](https://jsbin.com/bibifan/edit?js,console)
 
@@ -37,8 +49,10 @@ console.log("Sorpresa!");
 Los motores JS como V8 (Node, Chrome,...)/Spidermonkey(Firefox) implementan lo "más básico": el *heap* y el *stack*
 
 ![](images_event_loop/heap_stack.gif) <!-- .element class="stretch"-->
-
 [https://itnext.io/how-javascript-works-in-browser-and-node-ab7d0d09ac2f](https://itnext.io/how-javascript-works-in-browser-and-node-ab7d0d09ac2f) <!-- .element class="caption"-->
+
+- El *loop de eventos* lo implementa el navegador o node
+
 
 ---
 
