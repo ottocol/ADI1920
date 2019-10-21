@@ -228,6 +228,31 @@ Server: Apache/2.0.61   
 Access-Control-Allow-Origin: * 
 ```
 
+---
+
+
+## ¿Necesitamos CORS para usar nuestro propio API?
+
+No, pero nos da la libertad de que el servidor del API y del sitio web sean distintos
+
+![](images_logica/cors_nuestro_api.png) <!-- .element: class="stretch" -->
+
+
+---
+
+## Implementar CORS en el servidor
+
+Aunque "simplemente" se trata de generar las cabeceras adecuadas desde el servidor, en prácticamente todos los lenguajes de programación en el servidor tenemos alguna librería/paquete/plugin... que añade CORS a nuestra aplicación de modo sencillo.
+
+Por ejemplo en Express tenemos el paquete `cors`:
+
+```javascript
+var cors = require('cors')
+//Suponiendo "app" la variable obtenida como app=express()
+app.use(cors())
+//cors es un middleware, igual que lo era por ejemplo body-parser
+//por eso se especifica su uso del mismo modo
+```
 
 ---
 
