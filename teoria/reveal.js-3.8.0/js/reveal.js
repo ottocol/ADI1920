@@ -2220,6 +2220,8 @@
 
 				var oldScale = scale;
 
+				removeParagraphsFromStretchedImages()
+
 				// Layout the contents of the slides
 				layoutSlideContents( config.width, config.height );
 
@@ -5796,6 +5798,13 @@
 
 	};
 
+
+	function removeParagraphsFromStretchedImages() {
+    	toArray(dom.slides.querySelectorAll('section > p > .stretch')).forEach( 
+    		function( element ) {
+    		  element.parentNode.parentNode.replaceChild(element, element.parentNode)
+		    })
+    }
 
 	// --------------------------------------------------------------------//
 	// ------------------------------- API --------------------------------//
