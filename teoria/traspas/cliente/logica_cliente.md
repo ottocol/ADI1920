@@ -5,6 +5,8 @@
 
 ---
 
+# Indice 
+
 1. Introducción. Modelo del dominio
 2. Persistencia remota en el servidor
 3. Persistencia local
@@ -13,8 +15,8 @@
 
 <!-- .slide: class="titulo" -->
 
-#1. 
-#Introducción. Modelo del dominio
+# 1. 
+# Introducción. Modelo del dominio
 
 ---
 
