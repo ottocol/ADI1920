@@ -13,7 +13,8 @@
 
 <!-- .slide: class="titulo" -->
 
-1. Introducción. Modelo del dominio
+#1. 
+#Introducción. Modelo del dominio
 
 ---
 
@@ -39,7 +40,7 @@ En esta parte estamos en las capas "por debajo" del DOM y los *controllers*. Es 
 
 El "núcleo" de la aplicación, independiente de la interfaz. En aplicaciones clásicas reside en el *backend*. En aplicaciones modernas, en *backend* y *frontend*
 
-AQUI PONER QUE SON simplemente CLASES JS y que en aplicaciones pequeñas se puede obviar. Estaría bien tener el modelo de dominio de alguna app real.
+Son simplemente clases JS y en aplicaciones pequeñas se puede obviar, podemos crear los objetos "sobre la marcha" sin que pertenezcan a ninguna clase.
 
 ---
 
