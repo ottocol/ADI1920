@@ -44,6 +44,8 @@ El "núcleo" de la aplicación, independiente de la interfaz. En aplicaciones cl
 
 Son simplemente clases JS y en aplicaciones pequeñas se puede obviar, podemos crear los objetos "sobre la marcha" sin que pertenezcan a ninguna clase.
 
+Ejemplo: [diagrama de clases de Leaflet.JS](https://leafletjs.com/examples/extending/extending-1-classes.html)
+
 ---
 
 <!-- .slide: class="titulo" -->
