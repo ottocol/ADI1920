@@ -109,7 +109,6 @@ while (true) {
 
 ```javascript
 while (true) {
-    queue = getNextQueue()
     task = queue.pop()
     execute(task)
     while(!microtaskQueue.empty()) {
@@ -139,7 +138,6 @@ while (true) {
 
 ```javascript
 while (true) {
-    queue = getNextQueue()
     task = queue.pop()
     execute(task)
     while(!microtaskQueue.empty()) {
