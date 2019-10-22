@@ -160,9 +160,9 @@ for(i=1;i<=100;i++){
 ```
 [https://jsbin.com/helaqic/edit?html,js,output](https://jsbin.com/helaqic/edit?html,js,output)
 
-Pregunta: ¿Cómo lo arreglarías?
+¿Cómo lo arreglaríamos?
 
-Notas: 
+---
 
 Posible solución:
 
@@ -178,6 +178,7 @@ setTimeout(anim_frame,100, 1)
 ```
 
 ---
+
 `setInterval(callback, ms)` fija un temporizador cada x milisegundos que se ejecutará hasta que se pare con `clearInterval`
 
 ```javascript
@@ -199,7 +200,7 @@ timer = setInterval(anim_frame,50)
 
 ## requestAnimationFrame
 
-Función especializada para las animaciones que nos asegura una sincronización precisa a 60FPS (ejemplo de [`setTimeout` vs `requestAnimationFrame](https://codepen.io/klugjo/pen/zBYLOX)
+Función especializada para las animaciones que nos asegura una sincronización precisa a 60FPS (ejemplo de [`setTimeout` vs `requestAnimationFrame`](https://codepen.io/klugjo/pen/zBYLOX)
 )
 
 Desde dentro del *callback* de `requestAnimationFrame` hay que llamar a `requestAnimationFrame` igual que hacíamos con el `setTimeout`
