@@ -63,10 +63,14 @@ Los motores JS como V8 (Node, Chrome,...)/Spidermonkey(Firefox) implementan lo "
 
 ---
 
+1. Nuestro código llama a un API externo/del navegador asíncrono que se ejecuta "fuera de nuestro código". Le pasamos un *callback* 
+2. Al terminar la operación, hay que llamar al *callback*, esta tarea se coloca en una *cola de mensajes/eventos/tareas pendientes*
+3. Cuando termina la tarea actual (el *call stack* está vacío), pasamos a la siguiente de la cola.
 
-![](images_event_loop/event_loop_steps.png) 
+![](images_event_loop/cola_mensajes.png) 
 <!-- .element class="stretch"-->
-[https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) <!-- .element class="caption"-->
+
+[What the heck is the event loop anyway? / Philip Roberts / JSConf EU 2014](https://www.youtube.com/watch?v=8aGhZQkoFbQ)<!-- .element class="caption"-->
 
 
 ---
