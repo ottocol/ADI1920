@@ -6,7 +6,7 @@ El objetivo de esta práctica es desarrollar una web que sirva de cliente al API
 
 ## Requisitos mínimos
 
-La implementación correcta de estos requisitos es necesaria para poder aprobar la práctica. Con estos requisitos podéis optar hasta un 6 si comentáis adecuadamente el código fuente, indicando la funcionalidad de las variables, de cada clase (si las usáis), de cada método/función (descripción de lo que hace, parámetros, valor de retorno,...).
+La implementación correcta de estos requisitos es necesaria para poder aprobar la práctica. Con estos requisitos podéis optar hasta un 6 (un 5 por la implementación y 1 punto adicional por la documentación del fuente, indicando la funcionalidad de las variables, de cada clase (si las usáis), de cada método/función (descripción de lo que hace, parámetros, valor de retorno,...).
 
 ### Login/logout
 
@@ -20,10 +20,9 @@ Aunque en un API REST "puro" no existe formalmente la idea de "hacer login/hacer
 
 ### Listado de datos
 
-Implementa al menos un **listado de datos**, correspondiente a un caso de uso del API de tipo GET y que devuelva una colección. El listado debe tener las siguientes funcionalidades:
+Implementa al menos un **listado de datos**, correspondiente a un caso de uso del API de tipo GET y que devuelva una colección. 
 
--  En cada resultado aparecerá un botón o enlace "ver detalles" que al pulsarlo mostrará todos los detalles del item en cuestión.
--  En cada resultado aparecerá un botón o enlace "eliminar" para eliminar el item
+Además de mostrar los datos del item, en cada resultado aparecerá un botón o enlace "eliminar" para eliminar el item
 
 ### Creación de items
 
@@ -33,13 +32,16 @@ Implementa la funcionalidad de **crear un nuevo item**, es decir que sea un form
 
 Además de los 6 puntos de los requisitos mínimos, elegir de entre los siguientes:
 
-- hasta *1.5 puntos*: estilo visual de la web. Si usáis *frameworks* CSS como [bootstrap](http://getbootstrap.com/css/) podéis obtener hasta 1 punto. Si hacéis vuestro propio CSS hasta 1.5 puntos. En este último caso debéis usar alguna funcionalidad de posicionamiento CSS como *grid* o *flexbox*.
+- hasta *1.5 puntos*: estilo visual de la web. Si usáis *frameworks* CSS como [bootstrap](http://getbootstrap.com/css/) podéis obtener hasta 1 punto. Si hacéis vuestro propio CSS hasta 1.5 puntos. En este último caso debéis usar alguna funcionalidad de *layout* CSS como *grid* o *flexbox*.
+- hasta *0.5 puntos*: ver detalles:  cada elemento del listado mostrará solo los datos básicos. En cada elemento habrá un botón o enlace "ver detalles" que al pulsarlo mostrará todos los detalles del item en cuestión. 
+- hasta *0.5 puntos*: añadir mensajes de interacción con el usuario (al eliminar un item o crear un item nuevo) que tengan algún tipo de animación. Para crear las animaciones no se podrá usar ninguna librería adicional a los APIs nativos del navegador.
 - hasta *1 punto*: implementar el listado de otro recurso incluyendo también "ver detalles" y "eliminar".
 - hasta *1 punto*: edición de datos: cada elemento del listado debería tener un botón o enlace "editar" para cambiar su contenido. Al pulsarlo aparecerá un formulario para escribir los nuevos datos. Dónde y cómo aparezca (y desaparezca al acabar la edición) queda a vuestra elección.
-- hasta *1.5 puntos*: estructurar adecuadamente vuestro código para separar en lo posible lógica, presentación (manipulación del HTML) y comunicación con el servidor (`fetch`). 
+
+
 
 ## Entrega
 
-El plazo de entrega concluye el lunes **26 de noviembre de 2017** a las 23:59 horas. La entrega se realizará como es habitual a través de Moodle. Entregad una carpeta comprimida con el proyecto de esta práctica y el del servidor (modificado para usar CORS) en dos subcarpetas, ya que ambos son necesarios para ejecutar la aplicación. 
+El plazo de entrega concluye el lunes **18 de noviembre de 2019** a las 23:59 horas. La entrega se realizará como es habitual a través de Moodle. Entregad una carpeta comprimida con el proyecto de esta práctica y el del servidor (modificado para usar CORS) en dos subcarpetas, ya que ambos son necesarios para ejecutar la aplicación. 
 
 Entregad también un LEEME.txt donde expliquéis brevemente las partes optativas que habéis hecho y cualquier detalle que consideréis necesario.
