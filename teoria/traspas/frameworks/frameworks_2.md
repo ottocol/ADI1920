@@ -186,10 +186,15 @@ Como hemos visto en los ejemplos, el desarrollador lo programa como si se repint
 
 - Idea introducida por React
 - La función `React.createElement` no genera nodos del DOM real, sino nodos en memoria (en un "árbol DOM virtual"), con un API más rápido
-- Se hace una especie de *diff* entre el DOM virtual actual y el anterior. Según la [documentación de React](https://reactjs.org/docs/reconciliation.html) el coste es O(número de nodos)
+- En cada *render* se hace una especie de *diff* entre el DOM virtual actual y el anterior (denominada en React ["reconciliation"](https://reactjs.org/docs/reconciliation.html). Según la documentación de React el coste es lineal con el número de nodos
 - **Solo se repintan en el DOM real los nodos que cambian**. 
 
 
+---
+
+[Ejemplo de reconciliation](https://codepen.io/ottocol/pen/QWWVWPa?editors=1010)
+
+Para verlo hay que abrir la consola de desarrolladores del navegador, ir a ver el código fuente en "tiempo real" (pestaña "Elements" en Chrome, "Inspector" en Firefox) y buscar el div con id="root". Pese a que en el código de la función de render se repinta el componente entero, en el navegador solo se está cambiando un nodo.
 
 ---
 
