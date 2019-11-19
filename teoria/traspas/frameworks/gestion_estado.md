@@ -1,6 +1,6 @@
 <!-- .slide: class="titulo" -->
 
-# Tema 3, parte II
+# Tema 3, parte III
 # Frameworks JS en el cliente
 # Gestión del estado en el cliente web
 
