@@ -6,11 +6,16 @@
 
 ---
 
-> "Como los requisitos en aplicaciones JavaScript de una sola página se están volviendo cada vez más complicados, nuestro código, mas que nunca, debe manejar el estado. **Este estado puede incluir respuestas del servidor y datos cacheados, así como datos creados localmente que todavía no fueron guardados en el servidor. El estado de las UI también se volvió más complejo**, al necesitar mantener la ruta activa, el tab seleccionado, si mostrar o no un spinner, si deben mostrarse los controles de paginación o no.
+> "Como los requisitos en aplicaciones JavaScript de una sola página se están volviendo cada vez más complicados, nuestro código, mas que nunca, debe manejar el estado. **Este estado puede incluir respuestas del servidor y datos cacheados, así como datos creados localmente que todavía no fueron guardados en el servidor. El estado de las UI también se volvió más complejo**, al necesitar mantener la ruta activa, el tab seleccionado, si mostrar o no un spinner...
 
-> **Controlar ese cambiante estado es difícil**. Si un modelo puede actualizar otro modelo, entonces una vista puede actualizar un modelo, el cual actualiza otro modelo, y esto causa que otra vista se actualice. **En cierto punto, ya no se entiende que esta pasando en la aplicación ya que perdiste control sobre el cuándo, el por qué y el cómo de su estado**. Cuando un sistema es opaco y no determinista, es difícil reproducir errores o agregar nuevas características".
+> **Controlar ese cambiante estado es difícil**. Si un modelo puede actualizar otro modelo, entonces una vista puede actualizar un modelo, el cual actualiza otro modelo, y esto causa que otra vista se actualice. **En cierto punto, ya no se entiende que esta pasando en la aplicación ya que perdiste control sobre el cuándo, el por qué y el cómo de su estado**. 
 
-<!-- .element: class="caption"-->Tomado de la documentación de Redux: "[Motivación](http://es.redux.js.org/docs/introduccion/motivacion.html)"]
+De la documentación de Redux: ["Motivación"](http://es.redux.js.org/docs/introduccion/motivacion.html) 
+
+---
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">If you don&#39;t think managing state is tricky, consider the fact that 80% of all problems in all complex systems are fixed by rebooting.</p>&mdash; stuarthalloway (@stuarthalloway) <a href="https://twitter.com/stuarthalloway/status/1134806008528809985?ref_src=twsrc%5Etfw">June 1, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ---
 
@@ -22,7 +27,7 @@
 
 Recordemos que las aplicaciones Vue, React, Angular... están formadas de **componentes organizados jerárquicamente**
 
-<!-- .element: class="stretch" -->![](images_estado/component_tree.png)
+![](images_estado/component_tree.png)
 
 
 ---
@@ -87,11 +92,12 @@ EventBus.$emit('mi-evento', '¡Hola soy otro componente!');
 ```
 
 ```javascript
-//Componente 2: receptor. Suponemos hecho el import
+//Componente 2: receptor. Suponemos hecho el import 
 //Esto se haría normalmente en el método "created" del componente
 EventBus.$on('mi-evento', (datos)=>{ console.log(datos) };
 ```
-<!-- .element: class="caption" -->[Ejemplo completo](https://codesandbox.io/s/mzjz4v55m8)
+<!-- .element: class="caption" -->
+[Ejemplo completo](https://codesandbox.io/s/mzjz4v55m8)
 
 ---
 
@@ -108,7 +114,8 @@ Por desgracia, el *event bus* rompe la idea de *flujo unidireccional*. **¿Cómo
 
 Idea: ¿por qué no sacamos el estado fuera de todos los componentes y nos lo llevamos a un "almacén centralizado"?
 
-<!-- .element: class="stretch" -->![](images_estado/data_flow1.svg)
+<!-- .element: class="stretch" --> 
+![](images_estado/data_flow1.svg)
 
 De ese modo **todos los componentes** se convertirían en funcionales
 
@@ -156,7 +163,8 @@ var store = {
 
 ---
 
-<!-- .element: class="stretch" --> ![](images_estado/simple_store.png) 
+<!-- .element: class="stretch" --> 
+![](images_estado/simple_store.png) 
 
 
 ---
@@ -243,7 +251,8 @@ Vue.component('contador', {
 ## Flujo unidireccional en Vuex
 
 
-<!-- .element: class="stretch" --> ![](images_estado/vuex_diagrama.png)
+<!-- .element: class="stretch" -->
+![](images_estado/vuex_diagrama.png)
 
 
 Nota: todavía no hemos visto las *actions*, son como las mutaciones pero para 
@@ -266,7 +275,8 @@ Para **aplicaciones pequeñas, Vuex/Redux/NgRedux... no son necesarios**
 > **People often choose Redux before they need it**. “What if our app doesn’t scale without it?” **Later, developers frown at the indirection Redux introduced to their code**. “Why do I have to touch three files to get a simple feature working?” Why indeed!
 People blame Redux, React, functional programming, immutability, and many other things for their woes, and I understand them. It is natural to compare Redux to an approach that doesn’t require “boilerplate” code to update the state, and to conclude that Redux is just complicated
 
-<!-- .element: class="caption" --> Dan Abramov, [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)"
+<!-- .element: class="caption" --> 
+  Dan Abramov, [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)"
 
 ---
 
@@ -335,9 +345,8 @@ computed: {
 
 Como los cambios en el estado siempre se hacen con mutaciones, si hacemos un *log* de todas ellas, avanzando y retrocediendo por él podemos **reproducir el estado de la aplicación en cualquier momento**
 
-<!-- .element: class="caption" -->  (de la documentación de las [Vue dev tools](https://github.com/vuejs/vue-devtools), que incluyen *time travel debugging*)
-
-<!-- .element: class="stretch" -->![](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)
+<!-- .element: class="stretch" -->
+![](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)
 
 
 ---
@@ -362,7 +371,7 @@ actions: {
         context.commit('CHECKOUT_OK')
       })
       .catch(function(){
-        context.commit('CHECKOUT_OK'),
+        context.commit('CHECKOUT_ERROR'),
       })
   }
 }
