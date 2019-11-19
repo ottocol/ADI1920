@@ -18,6 +18,7 @@ Los requisitos mínimos serán los mismos que en la práctica anterior, recordad
 
 Además de los 6 puntos de los requisitos mínimos, elegir de entre los siguientes:
 
+- hasta *0.5 puntos* si usáis la estructura de proyecto que genera la herramienta `vue-CLI` y los componentes en ficheros `.vue`.
 - hasta *1 punto* si usáis algún *framework* de componentes visuales para Vue como [vuetify](https://vuetifyjs.com/en/) o [bootstrap-vue](https://bootstrap-vue.js.org)
 - hasta *0.5 puntos*: implementar la funcionalidad de "ver detalles" 
 - hasta *1 punto*: implementar el listado de otro recurso incluyendo también "ver detalles" y "eliminar".
